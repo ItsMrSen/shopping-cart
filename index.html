@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="plusMobile" class="btn btn-default"><i class="fas fa-plus"></i></button>
-                           <input id="valueMobile" type="text" class="form-control text-center" value="0">
-                           <button id="minusMobile" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button onclick="plusMobile()" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input id="valueMobile" type="text" class="form-control text-center" value="1">
+                           <button onclick="minusMobile()" class="btn btn-default"><i class="fas fa-minus"></i></button>
                         </div>
-                        <h5>$<span id="mobileTotal">0</span></h5>
+                        <h5>$<span id="mobileTotal">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="plusCase" class="btn btn-default"><i class="fas fa-plus"></i></button>
-                           <input id="valueCase" type="text" class="form-control text-center" value="0">
-                           <button id="minusCase" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button onclick="plusCase()" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input id="valueCase" type="text" class="form-control text-center" value="1">
+                           <button onclick="minusCase()" class="btn btn-default"><i class="fas fa-minus"></i></button>
 
                         </div>
-                        <h5>$<samp id="caseTotal">0</samp></h5>
+                        <h5>$<samp id="caseTotal">59</samp></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$<span id="subtotal">00</samp></h5>
-                        <h5>$<span id="tax">00</samp></h5>
-                        <h5>$<span id="total">00</samp></h5>
+                        <h5>$<span id="subtotal">1219</samp></h5>
+                        <h5>$<span id="tax">5%</samp></h5>
+                        <h5>$<span id="total">1219</samp></h5>
                         </div>
                   </div>
                </div>
@@ -79,76 +79,73 @@
    </section>
 
    <script>
-      //mobile plusBtn handler
-      const plusBtnMobile = document.getElementById("plusMobile");
-      plusBtnMobile.addEventListener("click", function(){
-         const valueMobile = document.getElementById("valueMobile").value;
-         const numA = Number(valueMobile);
-         const amountOfMobile = numA + 1;
-         document.getElementById("valueMobile").value = amountOfMobile;
+      //mobile item counter
+      function plusMobile() {
+         var mobilePlus = parseInt(document.getElementById("valueMobile").value);
+         mobilePlus ++;
+         document.getElementById("valueMobile").value = mobilePlus;
+         var totalPriceOfMobile = mobilePlus;
+         mobileTotalValue = mobileTotalValue;
+         totalPriceOfMobile = 1219 * mobileTotalValue;
+         document.getElementById("mobileTotal").innerText = totalPriceOfMobile;
+         totalAmount();
+      }
+      function minusMobile() {
+         var mobileMinus = parseInt(document.getElementById("valueMobile").value);
+         -- mobileMinus;
+         if (mobileMinus >= 0){
+            console.log(mobileMinus);
+         }
+         else {
+            return 0;
+         }
+         document.getElementById("valueMobile").value = mobileMinus;
+         var mobileTotalValue = mobileMinus;
+         mobileTotalValue = mobileTotalValue;
+         totalPriceOfMobile = 1219 * mobileTotalValue;
+         document.getElementById("mobileTotal").innerText = totalPriceOfMobile;
+         totalAmount();
+      }
 
-         const mobileAmount = document.getElementById("mobileTotal").innerText;
-         const mobileCount = Number(mobileAmount);
-         const updateAmount = mobileCount + 1219;
-         document.getElementById("mobileTotal").innerText = updateAmount;
-      })
+      //case item counter
+      function plusCase() {
+         var casePlus = parseInt(document.getElementById("valueCase").value);
+         casePlus ++;
+         document.getElementById("valueCase").value = casePlus;
+         var totalPriceOfCase = casePlus;
+         caseTotalValue = caseTotalValue;
+         totalPriceOfCase = 59 * caseTotalValue;
+         document.getElementById("caseTotal").innerText = totalPriceOfCase;
+         totalAmount();
+      }
+      function minusCase() {
+         var caseMinus = parseInt(document.getElementById("valueCase").value);
+         -- caseMinus;
+         if (caseMinus >= 0){
+            console.log(caseMinus);
+         }
+         else {
+            return 0;
+         }
+         document.getElementById("valueCase").value = caseMinus;
+         var caseTotalValue = caseMinus;
+         caseTotalValue = caseTotalValue;
+         totalPriceOfCase = 59 * caseTotalValue;
+         document.getElementById("caseTotal").innerText = totalPriceOfCase;
+         totalAmount();
+      }
 
-      const plusBtnCase = document.getElementById("plusCase");
-      plusBtnCase.addEventListener("click", function(){
-         const valueCase = document.getElementById("valueCase").value;
-         const numB = Number(valueCase);
-         const amountOfCase = numB + 1;
-         document.getElementById("valueCase").value= amountOfCase;
+      //total amount
+      function totalAmount() {
+         var subTotalMobile = parseInt(document.getElementById("valueMobile").innerText);
+         var subTotalCase = parseInt(document.getElementById("valueCase").innerText);
 
-         const caseAmount = document.getElementById("caseTotal").innerText;
-         const caseCount = Number(caseAmount);
-         const updateCaseAmount = caseCount + 59;
-         document.getElementById("caseTotal").innerText = updateCaseAmount;
+         var subtotal = subTotalMobile + subTotalCase;
+         var tax = subtotal * 5 / 100;
+         var total = subtotal + tax;
 
-         getSubTotal();
-
-      })
-      //case minusBtn handler
-      const minusBtnMobile = document.getElementById("minusMobile");
-      minusBtnMobile.addEventListener("click", function(){
-         const valueMobile = document.getElementById("valueMobile").value;
-         const numA = Number(valueMobile);
-         const amountOfMobile = numA - 1;
-         document.getElementById("valueMobile").value = amountOfMobile;
-
-         const mobileAmount = document.getElementById("mobileTotal").innerText;
-         const mobileCount = Number(mobileAmount);
-         const updateAmount = mobileCount - 1219;
-         document.getElementById("mobileTotal").innerText = updateAmount;
-      })
-
-      const minusBtnCase = document.getElementById("minusCase");
-      minusBtnCase.addEventListener("click", function(){
-         const valueCase = document.getElementById("valueCase").value;
-         const numB = Number(valueCase);
-         const amountOfCase = numB - 1;
-         document.getElementById("valueCase").value= amountOfCase;
-
-         const caseAmount = document.getElementById("caseTotal").innerText;
-         const caseCount = Number(caseAmount);
-         const updateCaseAmount = caseCount - 59;
-         document.getElementById("caseTotal").innerText = updateCaseAmount;
-
-         getSubTotal();
-
-      })
-
-      //total celculation
-
-      function getSubTotal(){
-         const totalMobilePrice = parseFloat(document.getElementsByName("mobileTotal").innerText);
-         const totalCasePrice = parseFloat(document.getElementById("caseTotal").innerText);         
-         
-         const subtotal = totalMobilePrice+totalCasePrice;
          document.getElementById("subTotal").innerText = subtotal;
-         document.getElementById("tax").innerText = (subtotal*.05).toFixed(2);
-
-         const total = parseFloat(document.getElementById("subTotal").innerText)+parseFloat(document.getElementById("tax").innerText);
+         document.getElementById("tax").innerText = tax;
          document.getElementById("total").innerText = total;
          }
    </script>
